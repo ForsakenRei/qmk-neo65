@@ -74,6 +74,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: /home/runner/qmk_firmware/firmware/*
-          asset_name: *.hex
+          asset_path: /home/runner/qmk_firmware/firmware/
+          asset_name: neo_neo65_ansi_default.hex
           asset_content_type: firmware/hex
