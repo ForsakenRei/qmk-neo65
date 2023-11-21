@@ -52,17 +52,6 @@ jobs:
         run: |
           echo "RELEASE_DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
 
-      #- name: Create Pull Request
-      #  uses: peter-evans/create-pull-request@v3
-      #  with:
-      #    token: ${{ secrets.PAT }}
-      #    commit-message: Sync repo to contain VIA Firmware as of ${{env.RELEASE_DATE}}'
-      #    title: '[automated-sync] VIA Firmware as of ${{env.RELEASE_DATE}}'
-      #    body: >
-      #      This PR is auto-generated
-      #    labels: automated-sync
-      #    team-reviewers: the-via/core
-
       - name: Package assets
         run: |
           mkdir ~/qmk_firmware/firmware
@@ -70,11 +59,21 @@ jobs:
           find ~/qmk_firmware -maxdepth 1 -name "*.bin" -exec mv '{}' ~/qmk_firmware/firmware \;
 
       - name: Create GitHub release
-        uses: marvinpinto/action-automatic-releases@latest
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "${{env.RELEASE_DATE}}"
-          title: ${{ env.ReleaseVersion }}
+          tag_name: ${{ env.RELEASE_DATE }}
+          release_name: ${{ env.ReleaseVersion }}
           prerelease: false
-          files: |
-            /home/runner/qmk_firmware/firmware/*
+          draft: false
+
+      - name: Upload assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: /home/runner/qmk_firmware/firmware/*
+          asset_name: *.hex
+          asset_content_type: firmware/hex
