@@ -20,14 +20,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      # Fix 402 error
-      - name: remove git-lfs
-        continue-on-error: true
-        shell: bash
-        run: |
-          sudo rm /etc/apt/sources.list.d/github_git-lfs.list
+      - uses: actions/checkout@v4
 
       - name: Setup and Build
         continue-on-error: true
@@ -58,22 +51,19 @@ jobs:
           find ~/qmk_firmware -maxdepth 1 -name "*.hex" -exec mv '{}' ~/qmk_firmware/firmware \;
           find ~/qmk_firmware -maxdepth 1 -name "*.bin" -exec mv '{}' ~/qmk_firmware/firmware \;
 
-      - name: Create GitHub release
-        uses: actions/create-release@v1
+      - name: Create release
+        uses: ncipollo/release-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.RELEASE_DATE }}
-          release_name: ${{ env.ReleaseVersion }}
+          tag: ${{ env.RELEASE_DATE }}
           prerelease: false
           draft: false
 
       - name: Upload assets
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-artifact@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: /home/runner/qmk_firmware/firmware/
-          asset_name: neo_neo65_ansi_default.hex
-          asset_content_type: firmware/hex
+          path: /home/runner/qmk_firmware/firmware/
+          name: neo_neo65_ansi_default.hex
