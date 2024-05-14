@@ -1,5 +1,7 @@
 # QMK firmware for neo65 wired PCB
 
+Note that this keyboard is not in the upstream qmk repo yet.
+
 ## Use QMK toolbox to flash
 `Fn`+`\` to ender bootloader or hold `B` when plug the board in.
 
