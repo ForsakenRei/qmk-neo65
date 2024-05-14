@@ -102,7 +102,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max)
     {
       for (uint8_t i = 0; i < ARRAYSIZE(LED_LAYER); i++)
       {
-        rgb_matrix_set_color(LED_LAYER[i], 0x00, 0x66, 0xbb);
+        rgb_matrix_set_color(LED_LAYER[i], RGB_CYAN);
       }
     }
     else
@@ -114,21 +114,21 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max)
     rgb_matrix_set_color_all(0, 0, 0);
     for (uint8_t i = 0; i < ARRAYSIZE(LED_LAYER); i++)
     {
-      rgb_matrix_set_color(LED_LAYER[i], 0xaa, 0xcc, 0x11);
+      rgb_matrix_set_color(LED_LAYER[i], RGB_GOLDENROD);
     }
     break;
   case _L2:
     rgb_matrix_set_color_all(0, 0, 0);
     for (uint8_t i = 0; i < ARRAYSIZE(LED_LAYER); i++)
     {
-      rgb_matrix_set_color(LED_LAYER[i], 0xff, 0x99, 0x00);
+      rgb_matrix_set_color(LED_LAYER[i], RGB_CHARTREUSE);
     }
     break;
   case _L3:
     rgb_matrix_set_color_all(0, 0, 0);
     for (uint8_t i = 0; i < ARRAYSIZE(LED_LAYER); i++)
     {
-      rgb_matrix_set_color(LED_LAYER[i], 0xee, 0x00, 0x77);
+      rgb_matrix_set_color(LED_LAYER[i], RGB_CORAL);
     }
     break;
   default:
