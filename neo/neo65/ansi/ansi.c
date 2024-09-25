@@ -115,17 +115,6 @@ led_config_t g_led_config = { {
     }
 };
 
-void suspend_power_down_kb(void) {
-    rgb_matrix_set_suspend_state(true);
-    suspend_power_down_user();
-}
-
-void suspend_wakeup_init_kb(void) {
-    rgb_matrix_set_suspend_state(false);
-    suspend_wakeup_init_user();
-}
-
-
 bool rgb_matrix_indicators_kb(void) {
     if (!rgb_matrix_indicators_user()) {
         return false;

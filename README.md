@@ -1,6 +1,8 @@
 # QMK firmware for neo65 wired PCB
 
-Note that this keyboard is not in the upstream qmk repo yet.
+Note that this keyboard is not in the upstream qmk repo yet. Additional `WinUSB` driver from `Zadig` is necessary.
+
+Ref: https://qwertykeys.notion.site/Neo65-Build-Guide-240f14127a97483baa6968a84751c4fa
 
 ## Use QMK toolbox to flash
 `Fn`+`\` to ender bootloader or hold `B` when plug the board in.
