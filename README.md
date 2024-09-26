@@ -6,7 +6,7 @@ Ref: https://qwertykeys.notion.site/Neo65-Build-Guide-240f14127a97483baa6968a847
 
 ## Use QMK CLI to flash
 
-Hold `B` when plugin the board to get bootloader.
+Hold `B` then connect the board to get into bootloader.
 
 `qmk compile -kb neo/neo65/ansi -km shigure -j 32`
 
