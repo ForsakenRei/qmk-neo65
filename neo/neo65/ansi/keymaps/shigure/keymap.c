@@ -326,11 +326,13 @@ tap_dance_action_t tap_dance_actions[] = {
 
 // key override
 const key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, KC_DEL);
-const key_override_t alt_f12_override = ko_make_basic(MOD_BIT(KC_RCTL), KC_EQL, A(KC_F12));
-const key_override_t shift_f12_override = ko_make_basic(MOD_BIT(KC_RCTL), KC_MINS, S(KC_F12));
+const key_override_t lalt_f12_override = ko_make_basic(MOD_BIT(KC_LALT), KC_EQL, A(KC_F12));
+const key_override_t rshift_f12_override = ko_make_basic(MOD_BIT(KC_RCTL), KC_MINS, S(KC_F12));
+const key_override_t rctrl_tilde_override = ko_make_basic(MOD_BIT(KC_RCTL), QK_GESC, C(KC_GRV));
 
 const key_override_t *key_overrides[] = {
     &delete_key_override,
-    &alt_f12_override,
-    &shift_f12_override,
+    &lalt_f12_override,
+    &rshift_f12_override,
+    &rctrl_tilde_override,
     NULL};
