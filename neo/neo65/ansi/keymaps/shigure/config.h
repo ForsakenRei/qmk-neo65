@@ -23,7 +23,6 @@
 // #define GRAVE_ESC_ALT_OVERRIDE
 // #define GRAVE_ESC_SHIFT_OVERRIDE
 #define GRAVE_ESC_CTRL_OVERRIDE
-    //Always send Escape if Control is pressed
 
 // tap vs hold time difference
 #define TAPPING_TERM 200

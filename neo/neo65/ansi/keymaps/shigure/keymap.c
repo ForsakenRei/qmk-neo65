@@ -95,50 +95,51 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef RGB_MATRIX_ENABLE
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max)
 {
-  if (keymap_config.no_gui)
-  {
-    rgb_matrix_set_color(LED_LGUI, RGB_RED); //light up Win key when disabled
-  }
-  switch (get_highest_layer(layer_state))
-  {
-  case _BASE:
-    if (host_keyboard_led_state().caps_lock)
+    if (keymap_config.no_gui)
     {
-      for (uint8_t i = 0; i < ARRAYSIZE(LED_LAYER); i++)
-      {
-        rgb_matrix_set_color(LED_LAYER[i], RGB_CYAN);
-      }
+        rgb_matrix_set_color(LED_LGUI, RGB_RED); // light up Win key when disabled
     }
-    else
-	{
-	  rgb_matrix_set_color_all(0, 0, 0);
-	}
-    break;
-  case _L1:
-    rgb_matrix_set_color_all(0, 0, 0);
-    for (uint8_t i = 0; i < ARRAYSIZE(LED_LAYER); i++)
+    switch (get_highest_layer(layer_state))
     {
-      rgb_matrix_set_color(LED_LAYER[i], RGB_GOLDENROD);
+    case _BASE:
+        if (host_keyboard_led_state().caps_lock)
+        {
+            rgb_matrix_set_color_all(0, 0, 0);
+            for (uint8_t i = 0; i < ARRAYSIZE(LED_LAYER); i++)
+            {
+                rgb_matrix_set_color(LED_LAYER[i], RGB_CYAN);
+            }
+        }
+        else
+        {
+            rgb_matrix_set_color_all(0, 0, 0);
+        }
+        break;
+    case _L1:
+        rgb_matrix_set_color_all(0, 0, 0);
+        for (uint8_t i = 0; i < ARRAYSIZE(LED_LAYER); i++)
+        {
+            rgb_matrix_set_color(LED_LAYER[i], RGB_GOLDENROD);
+        }
+        break;
+    case _L2:
+        rgb_matrix_set_color_all(0, 0, 0);
+        for (uint8_t i = 0; i < ARRAYSIZE(LED_LAYER); i++)
+        {
+            rgb_matrix_set_color(LED_LAYER[i], RGB_CHARTREUSE);
+        }
+        break;
+    case _L3:
+        rgb_matrix_set_color_all(0, 0, 0);
+        for (uint8_t i = 0; i < ARRAYSIZE(LED_LAYER); i++)
+        {
+            rgb_matrix_set_color(LED_LAYER[i], RGB_CORAL);
+        }
+        break;
+    default:
+        break;
     }
-    break;
-  case _L2:
-    rgb_matrix_set_color_all(0, 0, 0);
-    for (uint8_t i = 0; i < ARRAYSIZE(LED_LAYER); i++)
-    {
-      rgb_matrix_set_color(LED_LAYER[i], RGB_CHARTREUSE);
-    }
-    break;
-  case _L3:
-    rgb_matrix_set_color_all(0, 0, 0);
-    for (uint8_t i = 0; i < ARRAYSIZE(LED_LAYER); i++)
-    {
-      rgb_matrix_set_color(LED_LAYER[i], RGB_CORAL);
-    }
-    break;
-  default:
-    break;
-  }
-  return false;
+    return false;
 };
 #endif
 
@@ -326,11 +327,13 @@ tap_dance_action_t tap_dance_actions[] = {
 
 // key override
 const key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, KC_DEL);
-const key_override_t alt_f12_override = ko_make_basic(MOD_BIT(KC_RCTL), KC_EQL, A(KC_F12));
-const key_override_t shift_f12_override = ko_make_basic(MOD_BIT(KC_RCTL), KC_MINS, S(KC_F12));
+const key_override_t lalt_f12_override = ko_make_basic(MOD_BIT(KC_LALT), KC_EQL, A(KC_F12));
+const key_override_t rshift_f12_override = ko_make_basic(MOD_BIT(KC_RCTL), KC_MINS, S(KC_F12));
+const key_override_t rctrl_tilde_override = ko_make_basic(MOD_BIT(KC_RCTL), QK_GESC, C(KC_GRV));
 
 const key_override_t *key_overrides[] = {
     &delete_key_override,
-    &alt_f12_override,
-    &shift_f12_override,
+    &lalt_f12_override,
+    &rshift_f12_override,
+    &rctrl_tilde_override,
     NULL};
